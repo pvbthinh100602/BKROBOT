@@ -29,6 +29,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "software_timer.h"
+#include "move.h"
 #include "servo.h"
 /* USER CODE END Includes */
 
@@ -57,6 +58,9 @@
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 void ledBlink();
+
+
+
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -104,7 +108,12 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
+  HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_2);
+  HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_3);
+  HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_4);
   setTimer(0, 10);
+  setTimer(1, 1000);
   servo_init(SERVO1);
   /* USER CODE END 2 */
 
@@ -116,6 +125,10 @@ int main(void)
 		  setTimer(0, 10);
 		  ledBlink();
 		  testServo();
+	  }
+	  if(timer_flag[1] == 1){
+		  setTimer(1, 1000);
+		  testDc();
 	  }
     /* USER CODE END WHILE */
 
@@ -180,6 +193,23 @@ void ledBlink(){
 		HAL_GPIO_TogglePin(DEBUG_LED_GPIO_Port, DEBUG_LED_Pin);
 	}
 }
+
+
+
+void moveSM(uint8_t stepsPerRevolution){
+//	if(stepsPerRevolution >= 0){
+//		HAL_GPIO_WritePin(SM_DIR_GPIO_Port, SM_DIR_Pin, UP);
+//	}
+//	if(stepsPerRevolution < 0){
+//		HAL_GPIO_WritePin(SM_DIR_GPIO_Port, SM_DIR_Pin, DOWN);
+//		stepsPerRevolution = stepsPerRevolution * -1;
+//	}
+//	for(int i = 0; i < stepsPerRevolution; i++){
+//
+//	}
+
+}
+
 /* USER CODE END 4 */
 
 /**

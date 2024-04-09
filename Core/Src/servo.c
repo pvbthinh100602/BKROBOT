@@ -7,7 +7,7 @@
 
 #include "servo.h"
 
-uint32_t servo_channel[] = {TIM_CHANNEL_1, TIM_CHANNEL_2, TIM_CHANNEL_3};
+uint32_t servo_channel[3] = {TIM_CHANNEL_1, TIM_CHANNEL_2, TIM_CHANNEL_3};
 
 void servo_init(int servo_id){
 	HAL_TIM_PWM_Start(&htim4, servo_channel[servo_id]);
@@ -20,13 +20,13 @@ void servo_set_angle(int servo_id, int angle){
 }
 
 int servo_count = 0;
-int angle = 0;
+int angle = 90;
 void testServo(){
 	servo_count++;
 	if(servo_count == 500){
 		servo_count = 0;
-		angle += 90;
-		if(angle > 180) angle = 0;
+		angle += 45;
+		if(angle > 45) angle = 0;
 		for(int i = 0; i < 3; i++){
 			servo_set_angle(servo_channel[i],angle);
 		}

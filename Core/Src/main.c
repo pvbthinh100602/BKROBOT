@@ -83,6 +83,7 @@ void right();
 void left();
 void rotateLeft();
 void rotateRight();
+void testDc();
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -130,7 +131,12 @@ int main(void)
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
+  HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_1);
+  HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_2);
+  HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_3);
+  HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_4);
   setTimer(0, 10);
+  setTimer(1, 1000);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -140,6 +146,10 @@ int main(void)
 	  if(timer_flag[0] == 1){
 		  setTimer(0, 10);
 		  ledBlink();
+	  }
+	  if(timer_flag[1] == 1){
+		  setTimer(1, 1000);
+		  testDc();
 	  }
     /* USER CODE END WHILE */
 
@@ -211,16 +221,16 @@ void setSpeed(uint8_t dc, uint8_t duty_cycle) {
 	speed_duty_cycle = duty_cycle;
 	switch (dc){
 	case 1:
-		__HAL_TIM_SET_COMPARE(&htim8, M1_PWM_Pin, speed_duty_cycle);
+		__HAL_TIM_SET_COMPARE(&htim8, TIM_CHANNEL_4, speed_duty_cycle);
 		break;
 	case 2:
-		__HAL_TIM_SET_COMPARE(&htim8, M2_PWM_Pin, speed_duty_cycle);
+		__HAL_TIM_SET_COMPARE(&htim8, TIM_CHANNEL_3, speed_duty_cycle);
 		break;
 	case 3:
-		__HAL_TIM_SET_COMPARE(&htim8, M3_PWM_Pin, speed_duty_cycle);
+		__HAL_TIM_SET_COMPARE(&htim8, TIM_CHANNEL_1, speed_duty_cycle);
 		break;
 	case 4:
-		__HAL_TIM_SET_COMPARE(&htim8, M4_PWM_Pin, speed_duty_cycle);
+		__HAL_TIM_SET_COMPARE(&htim8, TIM_CHANNEL_2, speed_duty_cycle);
 		break;
 	}
 }
@@ -345,6 +355,22 @@ void rotateRight(){
 	dc2Move(SPEED);
 	dc3Move(-SPEED);
 	dc4Move(-SPEED);
+}
+
+uint8_t count_test = 10;
+void testDc(){
+	count_test--;
+	if(count_test >= 7)
+		forward();
+	else if(count_test >= 5)
+		backwards();
+	else if(count_test >= 3)
+		right();
+	else if (count_test >=1)
+		left();
+	else
+		count_test = 10;
+
 }
 
 void moveSM(uint8_t stepsPerRevolution){

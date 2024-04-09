@@ -29,6 +29,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "software_timer.h"
+#include "servo.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -104,6 +105,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
   setTimer(0, 10);
+  servo_init(SERVO1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -113,6 +115,7 @@ int main(void)
 	  if(timer_flag[0] == 1){
 		  setTimer(0, 10);
 		  ledBlink();
+		  testServo();
 	  }
     /* USER CODE END WHILE */
 

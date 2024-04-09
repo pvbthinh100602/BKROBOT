@@ -1,0 +1,3 @@
+../Core/Src/servo.c:12:6:servo_init	1
+../Core/Src/servo.c:16:6:servo_set_angle	6
+../Core/Src/servo.c:24:6:testServo	4

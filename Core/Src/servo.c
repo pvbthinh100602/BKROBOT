@@ -25,7 +25,7 @@ void testServo(){
 	servo_count++;
 	if(servo_count == 500){
 		servo_count = 0;
-//		angle += 90;
+		angle += 90;
 		if(angle > 180) angle = 0;
 		for(int i = 0; i < 3; i++){
 			servo_set_angle(servo_channel[i],angle);

@@ -1,0 +1,7 @@
+../Core/Src/gamepad.c:73:5:gamepad_init	2
+../Core/Src/gamepad.c:80:9:_read_16	2
+../Core/Src/gamepad.c:91:9:_read_32	2
+../Core/Src/gamepad.c:102:6:_convert_data	1
+../Core/Src/gamepad.c:121:6:gamepad_update	4
+../Core/Src/gamepad.c:142:9:gamepad_up	1
+../Core/Src/gamepad.c:146:9:gamepad_down	1

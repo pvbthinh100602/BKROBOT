@@ -31,6 +31,7 @@
 #include "software_timer.h"
 #include "move.h"
 #include "servo.h"
+#include "gamepad.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -115,6 +116,7 @@ int main(void)
   setTimer(0, 10);
   setTimer(1, 1000);
   servo_init(SERVO1);
+  gamepad_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -123,12 +125,19 @@ int main(void)
   {
 	  if(timer_flag[0] == 1){
 		  setTimer(0, 10);
-		  ledBlink();
-		  testServo();
+//		  ledBlink();
+//		  testServo();
+		  gamepad_update();
+		  if(gamepad_up()){
+			  servo_set_angle(SERVO1, 40);
+		  }
+		  if(gamepad_down()){
+			  servo_set_angle(SERVO1, 0);
+		  }
 	  }
 	  if(timer_flag[1] == 1){
 		  setTimer(1, 1000);
-		  testDc();
+//		  testDc();
 	  }
     /* USER CODE END WHILE */
 

@@ -23,10 +23,3 @@ void timerRun(int index){
 	}
 }
 
-void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef * htim ){
-	if(htim->Instance == TIM2){
-		timerRun(0);
-		timerRun(1);
-	}
-
-}

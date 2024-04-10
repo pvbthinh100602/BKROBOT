@@ -41,6 +41,8 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
+#define DUTY	50
+#define SPR		200
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -51,14 +53,14 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+int count_spr = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
 void ledBlink();
-
+void moveSM(int cycle);
 
 
 /* USER CODE END PFP */
@@ -106,6 +108,7 @@ int main(void)
   MX_TIM4_Init();
   MX_TIM5_Init();
   MX_TIM2_Init();
+  MX_TIM3_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT(&htim2);
   HAL_TIM_PWM_Start(&htim8, TIM_CHANNEL_1);
@@ -115,6 +118,7 @@ int main(void)
   setTimer(0, 10);
   setTimer(1, 1000);
   servo_init(SERVO1);
+  moveSM(3);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -126,10 +130,12 @@ int main(void)
 		  ledBlink();
 		  testServo();
 	  }
-	  if(timer_flag[1] == 1){
-		  setTimer(1, 1000);
-		  testDc();
-	  }
+//	  if(timer_flag[1] == 1){
+//		  setTimer(1, 1000);
+//		  testDc();
+//	  }
+
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -185,6 +191,21 @@ void SystemClock_Config(void)
 
 /* USER CODE BEGIN 4 */
 
+void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef * htim ){
+	if(htim->Instance == TIM2){
+		timerRun(0);
+		timerRun(1);
+	}
+}
+
+void HAL_TIM_PWM_PulseFinishedCallback(TIM_HandleTypeDef *htim) {
+	if(htim->Instance == TIM3){
+		count_spr--;
+		if(count_spr <= 0)
+			HAL_TIM_PWM_Stop_IT(&htim3, TIM_CHANNEL_1);
+	}
+}
+
 int led_debug_count = 0;
 void ledBlink(){
 	led_debug_count++;
@@ -194,21 +215,19 @@ void ledBlink(){
 	}
 }
 
-
-
-void moveSM(uint8_t stepsPerRevolution){
-//	if(stepsPerRevolution >= 0){
-//		HAL_GPIO_WritePin(SM_DIR_GPIO_Port, SM_DIR_Pin, UP);
+void moveSM(int cycle){
+//	if(cycle >= 0){
+		HAL_GPIO_WritePin(SM_DIR_GPIO_Port, SM_DIR_Pin, GPIO_PIN_SET);
+		count_spr = SPR * cycle;
 //	}
-//	if(stepsPerRevolution < 0){
-//		HAL_GPIO_WritePin(SM_DIR_GPIO_Port, SM_DIR_Pin, DOWN);
-//		stepsPerRevolution = stepsPerRevolution * -1;
+//	if(cycle < 0){
+//		HAL_GPIO_WritePin(SM_DIR_GPIO_Port, SM_DIR_Pin, GPIO_PIN_RESET);
+//		count_spr = SPR * cycle * -1;
 //	}
-//	for(int i = 0; i < stepsPerRevolution; i++){
-//
-//	}
-
+	__HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, DUTY);
+	HAL_TIM_PWM_Start_IT(&htim3, TIM_CHANNEL_1);
 }
+
 
 /* USER CODE END 4 */
 

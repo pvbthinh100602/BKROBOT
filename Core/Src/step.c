@@ -5,6 +5,7 @@
  *      Author: HaHuyen
  */
 
+#include "step.h"
 #include "tim.h"
 #include "main.h"
 

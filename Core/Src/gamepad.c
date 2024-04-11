@@ -9,6 +9,7 @@
 #include "math.h"
 #include "move.h"
 #include "servo.h"
+#include "step.h"
 
 #define _GAMEPAD_RECEIVER_ADDR 0x55<<1
 
@@ -160,7 +161,7 @@ int gamepad_calculate_leff_joystick(){
     if (angle < 0) angle += 360;
 
     if ((0 <= angle && angle < 10) || angle >= 350)
-        dir = ROBOT_DIR_R;
+        dir = ROBOT_DIR_SR;
     else if (15 <= angle && angle < 75)
         dir = ROBOT_DIR_RF;
     else if (80 <= angle && angle < 110)
@@ -168,7 +169,7 @@ int gamepad_calculate_leff_joystick(){
     else if (115 <= angle && angle < 165)
         dir = ROBOT_DIR_LF;
     else if (170 <= angle && angle < 190)
-        dir = ROBOT_DIR_L;
+        dir = ROBOT_DIR_SL;
     else if (195 <= angle && angle < 255)
         dir = ROBOT_DIR_LB;
     else if (260 <= angle && angle < 280)

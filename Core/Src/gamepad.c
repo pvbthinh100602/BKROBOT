@@ -142,7 +142,19 @@ void gamepad_update(){
 }
 
 int gamepad_calculate_leff_joystick(){
+	if(is_gamepad_connect == 0) return -1;
     int dir = -1;
+
+    int distance = (int)(sqrt(aLX*aLX + aLY*aLY));
+
+    if (distance < 15){
+        distance = 0;
+        dir = -1;
+        return dir;
+    }else if (distance > 100){
+    	distance = 100;
+    }
+
     int angle = (int)(atan2(aLY, aLX) * 180 / 3.14);
 
     if (angle < 0) angle += 360;
@@ -163,18 +175,30 @@ int gamepad_calculate_leff_joystick(){
         dir = ROBOT_DIR_BW;
     else if (285 <= angle && angle < 345)
         dir = ROBOT_DIR_RB;
-
     return dir;
 }
 
-
+int sm_pos = 1;
 void gamepad_run_tele(){
 	int my_dir = -1;
+	my_dir = gamepad_calculate_leff_joystick();
 	if(b) {
 		servo_set_angle(SERVO1, 0);
 	}
 	if(x){
 		servo_set_angle(SERVO1, 45);
+	}
+	if(a){
+		if(sm_pos == 1){
+			sm_pos = 0;
+			moveSM(-4);
+		}
+	}
+	if(y){
+		if(sm_pos == 0){
+			sm_pos = 1;
+			moveSM(4);
+		}
 	}
 	if(dpad_up){
 		my_dir = ROBOT_DIR_FW;

@@ -1,0 +1,2 @@
+../Core/Src/step.c:16:6:moveSM	16	static
+../Core/Src/step.c:29:6:HAL_TIM_PWM_PulseFinishedCallback	16	static

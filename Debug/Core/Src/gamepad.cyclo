@@ -3,7 +3,5 @@
 ../Core/Src/gamepad.c:94:9:_read_32	2
 ../Core/Src/gamepad.c:105:6:_convert_data	1
 ../Core/Src/gamepad.c:124:6:gamepad_update	4
-../Core/Src/gamepad.c:145:5:gamepad_calculate_leff_joystick	19
-../Core/Src/gamepad.c:172:6:gamepad_run_tele	7
-../Core/Src/gamepad.c:195:9:gamepad_up	1
-../Core/Src/gamepad.c:199:9:gamepad_down	1
+../Core/Src/gamepad.c:144:5:gamepad_calculate_leff_joystick	22
+../Core/Src/gamepad.c:182:6:gamepad_run_tele	11

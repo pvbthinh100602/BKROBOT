@@ -15,8 +15,8 @@ int gamepad_init();
 
 void gamepad_update();
 
-uint8_t gamepad_up();
+int gamepad_calculate_leff_joystick();
 
-uint8_t gamepad_down();
+void gamepad_run_tele();
 
 #endif /* INC_GAMEPAD_H_ */

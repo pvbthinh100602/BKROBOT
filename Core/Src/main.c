@@ -120,7 +120,6 @@ int main(void)
   setTimer(1, 1000);
   servo_init(SERVO1);
   gamepad_init();
-  moveSM(3);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -130,20 +129,10 @@ int main(void)
 	  if(timer_flag[0] == 1){
 		  setTimer(0, 10);
 		  ledBlink();
-//		  testServo();
 		  gamepad_update();
-		  if(gamepad_up()){
-			  servo_set_angle(SERVO1, 45);
-		  }
-		  if(gamepad_down()){
-			  servo_set_angle(SERVO1, 0);
-		  }
+		  gamepad_run_tele();
 	  }
 
-	  if(timer_flag[1] == 1){
-		  setTimer(1, 1000);
-//		  testDc();
-	  }
 
     /* USER CODE END WHILE */
 

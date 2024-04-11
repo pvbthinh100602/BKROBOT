@@ -5,12 +5,13 @@
  *      Author: HaHuyen
  */
 
+#include "move.h"
 #include "tim.h"
 #include "main.h"
 
 #define		UP			1
 #define 	DOWN 		0
-#define 	SPEED		60
+#define 	SPEED		50
 
 uint8_t speed_duty_cycle = 0;
 
@@ -32,7 +33,7 @@ void setSpeed(uint8_t dc, uint8_t duty_cycle) {
 	}
 }
 
-void dc1Move(uint8_t duty_cycle){
+void dc1Move(int duty_cycle){
 	if(duty_cycle >= 0){
 		HAL_GPIO_WritePin(M1_DIR_GPIO_Port, M1_DIR_Pin, UP);
 		setSpeed(1, duty_cycle);
@@ -43,7 +44,7 @@ void dc1Move(uint8_t duty_cycle){
 	}
 }
 
-void dc2Move(uint8_t duty_cycle){
+void dc2Move(int duty_cycle){
 	if(duty_cycle >= 0){
 		HAL_GPIO_WritePin(M2_DIR_GPIO_Port, M2_DIR_Pin, UP);
 		setSpeed(2, duty_cycle);
@@ -54,24 +55,24 @@ void dc2Move(uint8_t duty_cycle){
 	}
 }
 
-void dc3Move(uint8_t duty_cycle){
+void dc3Move(int duty_cycle){
 	if(duty_cycle >= 0){
-		HAL_GPIO_WritePin(M3_DIR_GPIO_Port, M3_DIR_Pin, UP);
+		HAL_GPIO_WritePin(M3_DIR_GPIO_Port, M3_DIR_Pin, DOWN);
 		setSpeed(3, duty_cycle);
 	}
 	if(duty_cycle < 0){
-		HAL_GPIO_WritePin(M3_DIR_GPIO_Port, M3_DIR_Pin, DOWN);
+		HAL_GPIO_WritePin(M3_DIR_GPIO_Port, M3_DIR_Pin, UP);
 		setSpeed(3, duty_cycle*-1);
 	}
 }
 
-void dc4Move(uint8_t duty_cycle){
+void dc4Move(int duty_cycle){
 	if(duty_cycle >= 0){
-		HAL_GPIO_WritePin(M4_DIR_GPIO_Port, M4_DIR_Pin, UP);
+		HAL_GPIO_WritePin(M4_DIR_GPIO_Port, M4_DIR_Pin, DOWN);
 		setSpeed(4, duty_cycle);
 	}
 	if(duty_cycle < 0){
-		HAL_GPIO_WritePin(M4_DIR_GPIO_Port, M4_DIR_Pin, DOWN);
+		HAL_GPIO_WritePin(M4_DIR_GPIO_Port, M4_DIR_Pin, UP);
 		setSpeed(4, duty_cycle*-1);
 	}
 }
@@ -168,4 +169,42 @@ void testDc(){
 	else
 		count_test = 10;
 
+}
+
+void runDir(int dir){
+	switch (dir) {
+		case ROBOT_DIR_FW:
+			forward();
+			break;
+		case ROBOT_DIR_SR:
+			right();
+			break;
+		case ROBOT_DIR_SL:
+			left();
+			break;
+		case ROBOT_DIR_L:
+			rotateLeft();
+			break;
+		case ROBOT_DIR_R:
+			rotateRight();
+			break;
+		case ROBOT_DIR_LB:
+			backLeft();
+			break;
+		case ROBOT_DIR_RB:
+			backRight();
+			break;
+		case ROBOT_DIR_LF:
+			frontLeft();
+			break;
+		case ROBOT_DIR_RF:
+			frontRight();
+			break;
+		case ROBOT_DIR_BW:
+			backwards();
+			break;
+		default:
+			stop();
+			break;
+	}
 }

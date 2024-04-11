@@ -6,6 +6,9 @@
  */
 
 #include "gamepad.h"
+#include "math.h"
+#include "move.h"
+#include "servo.h"
 
 #define _GAMEPAD_RECEIVER_ADDR 0x55<<1
 
@@ -135,18 +138,55 @@ void gamepad_update(){
 		buttons = _read_16(result[26], result[27]);
 		misc_buttons = _read_16(result[28], result[29]);
 	}
-
 	_convert_data();
 }
 
+int gamepad_calculate_leff_joystick(){
+    int dir = -1;
+    int angle = (int)(atan2(aLY, aLX) * 180 / 3.14);
+
+    if (angle < 0) angle += 360;
+
+    if ((0 <= angle && angle < 10) || angle >= 350)
+        dir = ROBOT_DIR_R;
+    else if (15 <= angle && angle < 75)
+        dir = ROBOT_DIR_RF;
+    else if (80 <= angle && angle < 110)
+        dir = ROBOT_DIR_FW;
+    else if (115 <= angle && angle < 165)
+        dir = ROBOT_DIR_LF;
+    else if (170 <= angle && angle < 190)
+        dir = ROBOT_DIR_L;
+    else if (195 <= angle && angle < 255)
+        dir = ROBOT_DIR_LB;
+    else if (260 <= angle && angle < 280)
+        dir = ROBOT_DIR_BW;
+    else if (285 <= angle && angle < 345)
+        dir = ROBOT_DIR_RB;
+
+    return dir;
+}
+
+
 void gamepad_run_tele(){
-
-}
-
-uint8_t gamepad_up(){
-	return dpad_up;
-}
-
-uint8_t gamepad_down(){
-	return dpad_down;
+	int my_dir = -1;
+	if(b) {
+		servo_set_angle(SERVO1, 0);
+	}
+	if(x){
+		servo_set_angle(SERVO1, 45);
+	}
+	if(dpad_up){
+		my_dir = ROBOT_DIR_FW;
+	}
+	if(dpad_down){
+		my_dir = ROBOT_DIR_BW;
+	}
+	if(dpad_left){
+		my_dir = ROBOT_DIR_L;
+	}
+	if(dpad_right){
+		my_dir = ROBOT_DIR_R;
+	}
+	runDir(my_dir);
 }

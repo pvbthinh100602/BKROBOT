@@ -103,29 +103,29 @@ void backwards(){
 
 void frontLeft(){
 	dc1Move(0); //stop
-	dc2Move(run_speed);
-	dc3Move(run_speed);
+	dc2Move(turn_speed);
+	dc3Move(turn_speed);
 	dc4Move(0); //stop
 }
 
 void frontRight(){
-	dc1Move(run_speed);
+	dc1Move(turn_speed);
 	dc2Move(0); //stop
 	dc3Move(0); //stop
-	dc4Move(run_speed);
+	dc4Move(turn_speed);
 }
 void backRight(){
 	dc1Move(0); //stop
-	dc2Move(-run_speed);
-	dc3Move(-run_speed);
+	dc2Move(-turn_speed);
+	dc3Move(-turn_speed);
 	dc4Move(0); //stop
 }
 
 void backLeft(){
-	dc1Move(-run_speed);
+	dc1Move(-turn_speed);
 	dc2Move(0); //stop
 	dc3Move(0); //stop
-	dc4Move(-run_speed);
+	dc4Move(-turn_speed);
 
 }
 

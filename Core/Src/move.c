@@ -11,7 +11,9 @@
 
 #define		UP			1
 #define 	DOWN 		0
-#define 	SPEED		50
+
+int run_speed = MIN_SPEED;
+int turn_speed = MIN_SPEED;
 
 uint8_t speed_duty_cycle = 0;
 
@@ -86,73 +88,73 @@ void stop(){
 }
 
 void forward(){
-	dc1Move(SPEED);
-	dc2Move(SPEED);
-	dc3Move(SPEED);
-	dc4Move(SPEED);
+	dc1Move(run_speed);
+	dc2Move(run_speed);
+	dc3Move(run_speed);
+	dc4Move(run_speed);
 }
 
 void backwards(){
-	dc1Move(-SPEED);
-	dc2Move(-SPEED);
-	dc3Move(-SPEED);
-	dc4Move(-SPEED);
+	dc1Move(-run_speed);
+	dc2Move(-run_speed);
+	dc3Move(-run_speed);
+	dc4Move(-run_speed);
 }
 
 void frontLeft(){
 	dc1Move(0); //stop
-	dc2Move(SPEED);
-	dc3Move(SPEED);
+	dc2Move(run_speed);
+	dc3Move(run_speed);
 	dc4Move(0); //stop
 }
 
 void frontRight(){
-	dc1Move(SPEED);
+	dc1Move(run_speed);
 	dc2Move(0); //stop
 	dc3Move(0); //stop
-	dc4Move(SPEED);
+	dc4Move(run_speed);
 }
 void backRight(){
 	dc1Move(0); //stop
-	dc2Move(-SPEED);
-	dc3Move(-SPEED);
+	dc2Move(-run_speed);
+	dc3Move(-run_speed);
 	dc4Move(0); //stop
 }
 
 void backLeft(){
-	dc1Move(-SPEED);
+	dc1Move(-run_speed);
 	dc2Move(0); //stop
 	dc3Move(0); //stop
-	dc4Move(-SPEED);
+	dc4Move(-run_speed);
 
 }
 
 void right(){
-	dc1Move(SPEED);
-	dc2Move(-SPEED);
-	dc3Move(-SPEED);
-	dc4Move(SPEED);
+	dc1Move(run_speed);
+	dc2Move(-run_speed);
+	dc3Move(-run_speed);
+	dc4Move(run_speed);
 }
 
 void left(){
-	dc1Move(-SPEED);
-	dc2Move(SPEED);
-	dc3Move(SPEED);
-	dc4Move(-SPEED);
+	dc1Move(-run_speed);
+	dc2Move(run_speed);
+	dc3Move(run_speed);
+	dc4Move(-run_speed);
 }
 
 void rotateLeft(){
-	dc1Move(-SPEED);
-	dc2Move(-SPEED);
-	dc3Move(SPEED);
-	dc4Move(SPEED);
+	dc1Move(-turn_speed);
+	dc2Move(-turn_speed);
+	dc3Move(turn_speed);
+	dc4Move(turn_speed);
 }
 
 void rotateRight(){
-	dc1Move(SPEED);
-	dc2Move(SPEED);
-	dc3Move(-SPEED);
-	dc4Move(-SPEED);
+	dc1Move(turn_speed);
+	dc2Move(turn_speed);
+	dc3Move(-turn_speed);
+	dc4Move(-turn_speed);
 }
 
 uint8_t count_test = 10;

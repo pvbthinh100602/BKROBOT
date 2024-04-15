@@ -30,7 +30,7 @@ Core/Src/gamepad.o: ../Core/Src/gamepad.c ../Core/Inc/gamepad.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h \
  ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
  ../Core/Inc/gpio.h ../Core/Inc/move.h ../Core/Inc/servo.h \
- ../Core/Inc/tim.h
+ ../Core/Inc/tim.h ../Core/Inc/step.h
 ../Core/Inc/gamepad.h:
 ../Core/Inc/i2c.h:
 ../Core/Inc/main.h:
@@ -67,3 +67,4 @@ Core/Src/gamepad.o: ../Core/Src/gamepad.c ../Core/Inc/gamepad.h \
 ../Core/Inc/move.h:
 ../Core/Inc/servo.h:
 ../Core/Inc/tim.h:
+../Core/Inc/step.h:

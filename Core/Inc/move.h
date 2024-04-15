@@ -21,6 +21,12 @@
 #define ROBOT_DIR_BW	9
 #define ROBOT_DIR_L		10
 
+#define 	MIN_SPEED		30
+#define 	MAX_SPEED		40
+
+extern int run_speed;
+extern int turn_speed;
+
 void dc1Move(int duty_cycle);
 void dc2Move(int duty_cycle);
 void dc3Move(int duty_cycle);

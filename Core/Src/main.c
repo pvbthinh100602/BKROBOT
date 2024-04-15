@@ -128,7 +128,7 @@ int main(void)
 		  setTimer(0, 10);
 		  ledBlink();
 		  gamepad_update();
-		  gamepad_run_tele();
+		  gamepad_run_tele(2);
 	  }
 
 

@@ -17,6 +17,6 @@ void gamepad_update();
 
 int gamepad_calculate_leff_joystick();
 
-void gamepad_run_tele();
+void gamepad_run_tele(int accel);
 
 #endif /* INC_GAMEPAD_H_ */

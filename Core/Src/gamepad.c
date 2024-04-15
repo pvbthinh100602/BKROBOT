@@ -180,7 +180,8 @@ int gamepad_calculate_leff_joystick(){
 }
 
 int sm_pos = 1;
-void gamepad_run_tele(){
+void gamepad_run_tele(int accel){
+	static int last_dir = -1;
 	int my_dir = -1;
 	my_dir = gamepad_calculate_leff_joystick();
 	if(b) {
@@ -212,6 +213,16 @@ void gamepad_run_tele(){
 	}
 	if(dpad_right){
 		my_dir = ROBOT_DIR_R;
+	}
+	if (my_dir != last_dir) // got new direction command
+	{
+        run_speed = MIN_SPEED; // reset speed
+        turn_speed = MIN_SPEED;
+	}else {
+		run_speed = run_speed + accel;
+		if(run_speed > MAX_SPEED) run_speed = MAX_SPEED;
+		turn_speed = turn_speed + accel/2;
+		if(turn_speed > MAX_SPEED) turn_speed = MAX_SPEED;
 	}
 	runDir(my_dir);
 }

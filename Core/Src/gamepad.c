@@ -163,19 +163,19 @@ int gamepad_calculate_leff_joystick(){
     if ((0 <= angle && angle < 10) || angle >= 350)
         dir = ROBOT_DIR_SR;
     else if (15 <= angle && angle < 75)
-        dir = ROBOT_DIR_RF;
+        dir = ROBOT_DIR_RB;
     else if (80 <= angle && angle < 110)
-        dir = ROBOT_DIR_FW;
+        dir = ROBOT_DIR_BW;
     else if (115 <= angle && angle < 165)
-        dir = ROBOT_DIR_LF;
+        dir = ROBOT_DIR_LB;
     else if (170 <= angle && angle < 190)
         dir = ROBOT_DIR_SL;
     else if (195 <= angle && angle < 255)
-        dir = ROBOT_DIR_LB;
+        dir = ROBOT_DIR_LF;
     else if (260 <= angle && angle < 280)
-        dir = ROBOT_DIR_BW;
+        dir = ROBOT_DIR_FW;
     else if (285 <= angle && angle < 345)
-        dir = ROBOT_DIR_RB;
+        dir = ROBOT_DIR_RF;
     return dir;
 }
 

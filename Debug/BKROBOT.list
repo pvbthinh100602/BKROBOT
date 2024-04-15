@@ -1928,8 +1928,8 @@ int gamepad_calculate_leff_joystick(){
  800128a:	68bb      	ldr	r3, [r7, #8]
  800128c:	2b4a      	cmp	r3, #74	; 0x4a
  800128e:	dc02      	bgt.n	8001296 <gamepad_calculate_leff_joystick+0xfe>
-        dir = ROBOT_DIR_RF;
- 8001290:	2302      	movs	r3, #2
+        dir = ROBOT_DIR_RB;
+ 8001290:	2306      	movs	r3, #6
  8001292:	60fb      	str	r3, [r7, #12]
  8001294:	e038      	b.n	8001308 <gamepad_calculate_leff_joystick+0x170>
     else if (80 <= angle && angle < 110)
@@ -1939,8 +1939,8 @@ int gamepad_calculate_leff_joystick(){
  800129c:	68bb      	ldr	r3, [r7, #8]
  800129e:	2b6d      	cmp	r3, #109	; 0x6d
  80012a0:	dc02      	bgt.n	80012a8 <gamepad_calculate_leff_joystick+0x110>
-        dir = ROBOT_DIR_FW;
- 80012a2:	2303      	movs	r3, #3
+        dir = ROBOT_DIR_BW;
+ 80012a2:	2309      	movs	r3, #9
  80012a4:	60fb      	str	r3, [r7, #12]
  80012a6:	e02f      	b.n	8001308 <gamepad_calculate_leff_joystick+0x170>
     else if (115 <= angle && angle < 165)
@@ -1950,8 +1950,8 @@ int gamepad_calculate_leff_joystick(){
  80012ae:	68bb      	ldr	r3, [r7, #8]
  80012b0:	2ba4      	cmp	r3, #164	; 0xa4
  80012b2:	dc02      	bgt.n	80012ba <gamepad_calculate_leff_joystick+0x122>
-        dir = ROBOT_DIR_LF;
- 80012b4:	2304      	movs	r3, #4
+        dir = ROBOT_DIR_LB;
+ 80012b4:	2305      	movs	r3, #5
  80012b6:	60fb      	str	r3, [r7, #12]
  80012b8:	e026      	b.n	8001308 <gamepad_calculate_leff_joystick+0x170>
     else if (170 <= angle && angle < 190)
@@ -1972,8 +1972,8 @@ int gamepad_calculate_leff_joystick(){
  80012d2:	68bb      	ldr	r3, [r7, #8]
  80012d4:	2bfe      	cmp	r3, #254	; 0xfe
  80012d6:	dc02      	bgt.n	80012de <gamepad_calculate_leff_joystick+0x146>
-        dir = ROBOT_DIR_LB;
- 80012d8:	2305      	movs	r3, #5
+        dir = ROBOT_DIR_LF;
+ 80012d8:	2304      	movs	r3, #4
  80012da:	60fb      	str	r3, [r7, #12]
  80012dc:	e014      	b.n	8001308 <gamepad_calculate_leff_joystick+0x170>
     else if (260 <= angle && angle < 280)
@@ -1983,8 +1983,8 @@ int gamepad_calculate_leff_joystick(){
  80012e6:	68bb      	ldr	r3, [r7, #8]
  80012e8:	f5b3 7f8c 	cmp.w	r3, #280	; 0x118
  80012ec:	da02      	bge.n	80012f4 <gamepad_calculate_leff_joystick+0x15c>
-        dir = ROBOT_DIR_BW;
- 80012ee:	2309      	movs	r3, #9
+        dir = ROBOT_DIR_FW;
+ 80012ee:	2303      	movs	r3, #3
  80012f0:	60fb      	str	r3, [r7, #12]
  80012f2:	e009      	b.n	8001308 <gamepad_calculate_leff_joystick+0x170>
     else if (285 <= angle && angle < 345)
@@ -1994,8 +1994,8 @@ int gamepad_calculate_leff_joystick(){
  80012fc:	68bb      	ldr	r3, [r7, #8]
  80012fe:	f5b3 7fac 	cmp.w	r3, #344	; 0x158
  8001302:	dc01      	bgt.n	8001308 <gamepad_calculate_leff_joystick+0x170>
-        dir = ROBOT_DIR_RB;
- 8001304:	2306      	movs	r3, #6
+        dir = ROBOT_DIR_RF;
+ 8001304:	2302      	movs	r3, #2
  8001306:	60fb      	str	r3, [r7, #12]
     return dir;
  8001308:	68fb      	ldr	r3, [r7, #12]

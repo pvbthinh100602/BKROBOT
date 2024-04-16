@@ -17,4 +17,6 @@ void display_run();
 
 void display_7seg(int num);
 
+void display_led(uint8_t data_byte);
+
 #endif /* INC_DISPLAY_H_ */

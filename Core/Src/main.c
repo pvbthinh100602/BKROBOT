@@ -35,6 +35,7 @@
 #include "step.h"
 #include "tone.h"
 #include "display.h"
+#include "sensor.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -121,7 +122,8 @@ int main(void)
   servo_init(SERVO1);
   gamepad_init();
   display_init();
-  display_7seg(69);
+  display_7seg(47);
+  display_led(0x0f);
   int len = 17;
   int note[17] = { NOTE_C5, NOTE_D5, NOTE_E5, NOTE_C5, NOTE_MUTE,
 		  	  	  NOTE_C5, NOTE_D5, NOTE_E5, NOTE_C5, NOTE_MUTE,

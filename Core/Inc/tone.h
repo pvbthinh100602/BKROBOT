@@ -24,6 +24,8 @@
 #define NOTE_AS5	932
 #define NOTE_B5	988
 
-void tone_play(int* note, int* dur, int len);
+void buzzer_start_freq(uint32_t frequency);
+
+void buzzer_stop();
 
 #endif /* INC_TONE_H_ */

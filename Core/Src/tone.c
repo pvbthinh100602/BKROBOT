@@ -7,7 +7,7 @@
 
 #include "tone.h"
 
-void __pwm_play_freq(uint32_t frequency){
+void buzzer_start_freq(uint32_t frequency){
 	if(frequency == 0) return;
 	uint32_t timer_clock = 72000000;  // Example for APB1 timer
 	uint32_t prescaler = 0;
@@ -26,12 +26,15 @@ void __pwm_play_freq(uint32_t frequency){
 	HAL_TIM_PWM_Start(&htim5, TIM_CHANNEL_1); // Re-start PWM to apply changes
 }
 
+void buzzer_stop(){
+	HAL_TIM_PWM_Stop(&htim5, TIM_CHANNEL_1);
+}
+
 //blocking function
 void tone_play(int* note, int* dur, int len){
 	for(int i = 0; i < len; i++){
-		__pwm_play_freq(note[i]);
-//		while(htim5.State != HAL_TIM_STATE_READY);
+		buzzer_start_freq(note[i]);
 		HAL_Delay(dur[i]);
-		HAL_TIM_PWM_Stop(&htim5, TIM_CHANNEL_1);
+		buzzer_stop();
 	}
 }

@@ -28,4 +28,6 @@ void buzzer_start_freq(uint32_t frequency);
 
 void buzzer_stop();
 
+void tone_play(int* note, int* dur, int len);
+
 #endif /* INC_TONE_H_ */

@@ -33,6 +33,7 @@
 #include "servo.h"
 #include "gamepad.h"
 #include "step.h"
+#include "tone.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -118,6 +119,20 @@ int main(void)
   setTimer(1, 1000);
   servo_init(SERVO1);
   gamepad_init();
+  HAL_TIM_PWM_Start(&htim5, TIM_CHANNEL_1); // Re-start PWM to apply changes
+  HAL_TIM_PWM_Stop(&htim5, TIM_CHANNEL_1);
+  HAL_Delay(1000);
+  int len = 17;
+  int note[17] = { NOTE_C5, NOTE_D5, NOTE_E5, NOTE_C5, NOTE_MUTE,
+		  	  	  NOTE_C5, NOTE_D5, NOTE_E5, NOTE_C5, NOTE_MUTE,
+				  NOTE_E5, NOTE_F5, NOTE_G5, NOTE_MUTE,
+				  NOTE_E5, NOTE_F5, NOTE_G5};
+  int dur[17] = { 1000, 500, 500, 500, 200,
+		  500, 500, 500, 500, 200,
+		  500, 500, 500, 200,
+		  500, 500, 500};
+
+  tone_play(note, dur, len);
   /* USER CODE END 2 */
 
   /* Infinite loop */

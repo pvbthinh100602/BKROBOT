@@ -31,21 +31,21 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY
  13 .debug_info   000158af  00000000  00000000  000200f4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_abbrev 000039f5  00000000  00000000  000359a3  2**0
+ 14 .debug_abbrev 00003a08  00000000  00000000  000359a3  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_aranges 00001468  00000000  00000000  00039398  2**3
+ 15 .debug_aranges 00001468  00000000  00000000  000393b0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_rnglists 00000fe4  00000000  00000000  0003a800  2**0
+ 16 .debug_rnglists 00000fe4  00000000  00000000  0003a818  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_macro  0001c7a9  00000000  00000000  0003b7e4  2**0
+ 17 .debug_macro  0001c7a9  00000000  00000000  0003b7fc  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_line   0001bed2  00000000  00000000  00057f8d  2**0
+ 18 .debug_line   0001bed2  00000000  00000000  00057fa5  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_str    000a2be8  00000000  00000000  00073e5f  2**0
+ 19 .debug_str    000a2be8  00000000  00000000  00073e77  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .debug_frame  000057a4  00000000  00000000  00116a48  2**2
+ 20 .debug_frame  000057a4  00000000  00000000  00116a60  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000043  00000000  00000000  0011c1ec  2**0
+ 21 .debug_line_str 00000043  00000000  00000000  0011c204  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -3306,12 +3306,12 @@ void frontLeft(){
 	dc1Move(0); //stop
  8001b28:	2000      	movs	r0, #0
  8001b2a:	f7ff ff0f 	bl	800194c <dc1Move>
-	dc2Move(turn_speed);
+	dc2Move(run_speed);
  8001b2e:	4b07      	ldr	r3, [pc, #28]	; (8001b4c <frontLeft+0x28>)
  8001b30:	681b      	ldr	r3, [r3, #0]
  8001b32:	4618      	mov	r0, r3
  8001b34:	f7ff ff34 	bl	80019a0 <dc2Move>
-	dc3Move(turn_speed);
+	dc3Move(run_speed);
  8001b38:	4b04      	ldr	r3, [pc, #16]	; (8001b4c <frontLeft+0x28>)
  8001b3a:	681b      	ldr	r3, [r3, #0]
  8001b3c:	4618      	mov	r0, r3
@@ -3322,14 +3322,14 @@ void frontLeft(){
 }
  8001b48:	bf00      	nop
  8001b4a:	bd80      	pop	{r7, pc}
- 8001b4c:	2000000c 	.word	0x2000000c
+ 8001b4c:	20000008 	.word	0x20000008
 
 08001b50 <frontRight>:
 
 void frontRight(){
  8001b50:	b580      	push	{r7, lr}
  8001b52:	af00      	add	r7, sp, #0
-	dc1Move(turn_speed);
+	dc1Move(run_speed);
  8001b54:	4b08      	ldr	r3, [pc, #32]	; (8001b78 <frontRight+0x28>)
  8001b56:	681b      	ldr	r3, [r3, #0]
  8001b58:	4618      	mov	r0, r3
@@ -3340,7 +3340,7 @@ void frontRight(){
 	dc3Move(0); //stop
  8001b64:	2000      	movs	r0, #0
  8001b66:	f7ff ff45 	bl	80019f4 <dc3Move>
-	dc4Move(turn_speed);
+	dc4Move(run_speed);
  8001b6a:	4b03      	ldr	r3, [pc, #12]	; (8001b78 <frontRight+0x28>)
  8001b6c:	681b      	ldr	r3, [r3, #0]
  8001b6e:	4618      	mov	r0, r3
@@ -3348,7 +3348,7 @@ void frontRight(){
 }
  8001b74:	bf00      	nop
  8001b76:	bd80      	pop	{r7, pc}
- 8001b78:	2000000c 	.word	0x2000000c
+ 8001b78:	20000008 	.word	0x20000008
 
 08001b7c <backRight>:
 void backRight(){
@@ -3357,13 +3357,13 @@ void backRight(){
 	dc1Move(0); //stop
  8001b80:	2000      	movs	r0, #0
  8001b82:	f7ff fee3 	bl	800194c <dc1Move>
-	dc2Move(-turn_speed);
+	dc2Move(-run_speed);
  8001b86:	4b08      	ldr	r3, [pc, #32]	; (8001ba8 <backRight+0x2c>)
  8001b88:	681b      	ldr	r3, [r3, #0]
  8001b8a:	425b      	negs	r3, r3
  8001b8c:	4618      	mov	r0, r3
  8001b8e:	f7ff ff07 	bl	80019a0 <dc2Move>
-	dc3Move(-turn_speed);
+	dc3Move(-run_speed);
  8001b92:	4b05      	ldr	r3, [pc, #20]	; (8001ba8 <backRight+0x2c>)
  8001b94:	681b      	ldr	r3, [r3, #0]
  8001b96:	425b      	negs	r3, r3
@@ -3375,14 +3375,14 @@ void backRight(){
 }
  8001ba4:	bf00      	nop
  8001ba6:	bd80      	pop	{r7, pc}
- 8001ba8:	2000000c 	.word	0x2000000c
+ 8001ba8:	20000008 	.word	0x20000008
 
 08001bac <backLeft>:
 
 void backLeft(){
  8001bac:	b580      	push	{r7, lr}
  8001bae:	af00      	add	r7, sp, #0
-	dc1Move(-turn_speed);
+	dc1Move(-run_speed);
  8001bb0:	4b09      	ldr	r3, [pc, #36]	; (8001bd8 <backLeft+0x2c>)
  8001bb2:	681b      	ldr	r3, [r3, #0]
  8001bb4:	425b      	negs	r3, r3
@@ -3394,7 +3394,7 @@ void backLeft(){
 	dc3Move(0); //stop
  8001bc2:	2000      	movs	r0, #0
  8001bc4:	f7ff ff16 	bl	80019f4 <dc3Move>
-	dc4Move(-turn_speed);
+	dc4Move(-run_speed);
  8001bc8:	4b03      	ldr	r3, [pc, #12]	; (8001bd8 <backLeft+0x2c>)
  8001bca:	681b      	ldr	r3, [r3, #0]
  8001bcc:	425b      	negs	r3, r3
@@ -3404,7 +3404,7 @@ void backLeft(){
 }
  8001bd4:	bf00      	nop
  8001bd6:	bd80      	pop	{r7, pc}
- 8001bd8:	2000000c 	.word	0x2000000c
+ 8001bd8:	20000008 	.word	0x20000008
 
 08001bdc <right>:
 

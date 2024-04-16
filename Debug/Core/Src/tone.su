@@ -1,0 +1,2 @@
+../Core/Src/tone.c:10:6:__pwm_play_freq	32	static
+../Core/Src/tone.c:30:6:tone_play	32	static

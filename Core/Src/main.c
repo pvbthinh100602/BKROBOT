@@ -34,6 +34,7 @@
 #include "gamepad.h"
 #include "step.h"
 #include "tone.h"
+#include "display.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -119,9 +120,8 @@ int main(void)
   setTimer(1, 1000);
   servo_init(SERVO1);
   gamepad_init();
-  HAL_TIM_PWM_Start(&htim5, TIM_CHANNEL_1); // Re-start PWM to apply changes
-  HAL_TIM_PWM_Stop(&htim5, TIM_CHANNEL_1);
-  HAL_Delay(1000);
+  display_init();
+  display_7seg(69);
   int len = 17;
   int note[17] = { NOTE_C5, NOTE_D5, NOTE_E5, NOTE_C5, NOTE_MUTE,
 		  	  	  NOTE_C5, NOTE_D5, NOTE_E5, NOTE_C5, NOTE_MUTE,
@@ -133,6 +133,7 @@ int main(void)
 		  500, 500, 500};
 
   tone_play(note, dur, len);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -206,6 +207,7 @@ void HAL_TIM_PeriodElapsedCallback ( TIM_HandleTypeDef * htim ){
 	if(htim->Instance == TIM2){
 		timerRun(0);
 		timerRun(1);
+		display_run();
 	}
 }
 

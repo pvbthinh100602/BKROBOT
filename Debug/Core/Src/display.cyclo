@@ -1,0 +1,3 @@
+../Core/Src/display.c:16:6:display_init	1
+../Core/Src/display.c:20:6:display_run	5
+../Core/Src/display.c:50:6:display_7seg	1

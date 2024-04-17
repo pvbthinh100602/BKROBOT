@@ -183,6 +183,8 @@ int sm_pos = 1;
 void gamepad_run_tele(int accel){
 	static int last_dir = -1;
 	int my_dir = -1;
+	int run_speed = MIN_SPEED;
+	int turn_speed = MIN_SPEED;
 	my_dir = gamepad_calculate_leff_joystick();
 	if(b) {
 		servo_set_angle(SERVO1, 0);
@@ -224,5 +226,25 @@ void gamepad_run_tele(int accel){
 		turn_speed = turn_speed + accel/2;
 		if(turn_speed > MAX_SPEED) turn_speed = MAX_SPEED;
 	}
-	runDir(my_dir);
+
+	switch(my_dir){
+	case ROBOT_DIR_FW:
+	case ROBOT_DIR_BW:
+	case ROBOT_DIR_SL:
+	case ROBOT_DIR_SR:
+		runDir(my_dir, run_speed);
+		break;
+	case ROBOT_DIR_R:
+	case ROBOT_DIR_L:
+	case ROBOT_DIR_LB:
+	case ROBOT_DIR_LF:
+	case ROBOT_DIR_RB:
+	case ROBOT_DIR_RF:
+		runDir(my_dir, turn_speed);
+		break;
+	default:
+		stop();
+		break;
+	}
+
 }

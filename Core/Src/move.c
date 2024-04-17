@@ -12,9 +12,6 @@
 #define		UP			1
 #define 	DOWN 		0
 
-int run_speed = MIN_SPEED;
-int turn_speed = MIN_SPEED;
-
 uint8_t speed_duty_cycle = 0;
 
 void setSpeed(uint8_t dc, uint8_t duty_cycle) {
@@ -87,123 +84,123 @@ void stop(){
 	dc4Move(0);
 }
 
-void forward(){
-	dc1Move(run_speed);
-	dc2Move(run_speed);
-	dc3Move(run_speed);
-	dc4Move(run_speed);
+void forward(int speed){
+	dc1Move(speed);
+	dc2Move(speed);
+	dc3Move(speed);
+	dc4Move(speed);
 }
 
-void backwards(){
-	dc1Move(-run_speed);
-	dc2Move(-run_speed);
-	dc3Move(-run_speed);
-	dc4Move(-run_speed);
+void backwards(int speed){
+	dc1Move(-speed);
+	dc2Move(-speed);
+	dc3Move(-speed);
+	dc4Move(-speed);
 }
 
-void frontLeft(){
+void frontLeft(int speed){
 	dc1Move(0); //stop
-	dc2Move(run_speed);
-	dc3Move(run_speed);
+	dc2Move(speed);
+	dc3Move(speed);
 	dc4Move(0); //stop
 }
 
-void frontRight(){
-	dc1Move(run_speed);
+void frontRight(int speed){
+	dc1Move(speed);
 	dc2Move(0); //stop
 	dc3Move(0); //stop
-	dc4Move(run_speed);
+	dc4Move(speed);
 }
-void backRight(){
+void backRight(int speed){
 	dc1Move(0); //stop
-	dc2Move(-run_speed);
-	dc3Move(-run_speed);
+	dc2Move(-speed);
+	dc3Move(-speed);
 	dc4Move(0); //stop
 }
 
-void backLeft(){
-	dc1Move(-run_speed);
+void backLeft(int speed){
+	dc1Move(-speed);
 	dc2Move(0); //stop
 	dc3Move(0); //stop
-	dc4Move(-run_speed);
+	dc4Move(-speed);
 
 }
 
-void right(){
-	dc1Move(run_speed);
-	dc2Move(-run_speed);
-	dc3Move(-run_speed);
-	dc4Move(run_speed);
+void right(int speed){
+	dc1Move(speed);
+	dc2Move(-speed);
+	dc3Move(-speed);
+	dc4Move(speed);
 }
 
-void left(){
-	dc1Move(-run_speed);
-	dc2Move(run_speed);
-	dc3Move(run_speed);
-	dc4Move(-run_speed);
+void left(int speed){
+	dc1Move(-speed);
+	dc2Move(speed);
+	dc3Move(speed);
+	dc4Move(-speed);
 }
 
-void rotateLeft(){
-	dc1Move(-turn_speed);
-	dc2Move(-turn_speed);
-	dc3Move(turn_speed);
-	dc4Move(turn_speed);
+void rotateLeft(int speed){
+	dc1Move(-speed);
+	dc2Move(-speed);
+	dc3Move(speed);
+	dc4Move(speed);
 }
 
-void rotateRight(){
-	dc1Move(turn_speed);
-	dc2Move(turn_speed);
-	dc3Move(-turn_speed);
-	dc4Move(-turn_speed);
+void rotateRight(int speed){
+	dc1Move(speed);
+	dc2Move(speed);
+	dc3Move(-speed);
+	dc4Move(-speed);
 }
 
 uint8_t count_test = 10;
 void testDc(){
 	count_test--;
 	if(count_test >= 7)
-		forward();
+		forward(MAX_SPEED);
 	else if(count_test >= 5)
-		backwards();
+		backwards(MAX_SPEED);
 	else if(count_test >= 3)
-		right();
+		right(MAX_SPEED);
 	else if (count_test >=1)
-		left();
+		left(MAX_SPEED);
 	else
 		count_test = 10;
 
 }
 
-void runDir(int dir){
+void runDir(int dir, int speed){
 	switch (dir) {
 		case ROBOT_DIR_FW:
-			forward();
+			forward(speed);
 			break;
 		case ROBOT_DIR_SR:
-			right();
+			right(speed);
 			break;
 		case ROBOT_DIR_SL:
-			left();
+			left(speed);
 			break;
 		case ROBOT_DIR_L:
-			rotateLeft();
+			rotateLeft(speed);
 			break;
 		case ROBOT_DIR_R:
-			rotateRight();
+			rotateRight(speed);
 			break;
 		case ROBOT_DIR_LB:
-			backLeft();
+			backLeft(speed);
 			break;
 		case ROBOT_DIR_RB:
-			backRight();
+			backRight(speed);
 			break;
 		case ROBOT_DIR_LF:
-			frontLeft();
+			frontLeft(speed);
 			break;
 		case ROBOT_DIR_RF:
-			frontRight();
+			frontRight(speed);
 			break;
 		case ROBOT_DIR_BW:
-			backwards();
+			backwards(speed);
 			break;
 		default:
 			stop();

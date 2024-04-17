@@ -35,7 +35,6 @@
 #include "step.h"
 #include "tone.h"
 #include "display.h"
-#include "sensor.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/

@@ -1,5 +1,5 @@
-../Core/Src/main.c:79:5:main	2
-../Core/Src/main.c:166:6:SystemClock_Config	4
-../Core/Src/main.c:210:6:HAL_TIM_PeriodElapsedCallback	2
-../Core/Src/main.c:221:6:ledBlink	2
-../Core/Src/main.c:238:6:Error_Handler	1
+../Core/Src/main.c:78:5:main	2
+../Core/Src/main.c:163:6:SystemClock_Config	4
+../Core/Src/main.c:207:6:HAL_TIM_PeriodElapsedCallback	2
+../Core/Src/main.c:218:6:ledBlink	2
+../Core/Src/main.c:235:6:Error_Handler	1

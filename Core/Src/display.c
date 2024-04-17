@@ -20,6 +20,11 @@ void display_init() {
 void display_run() {
 
 	spi_buffer = display_buffer[display_index];
+
+	HAL_GPIO_WritePin(LED_LATCH_GPIO_Port, LED_LATCH_Pin, 0);
+	HAL_SPI_Transmit(&hspi1, (void*) &spi_buffer, 1, 1);
+	HAL_GPIO_WritePin(LED_LATCH_GPIO_Port, LED_LATCH_Pin, 1);
+
 	switch (display_index) {
 	case 0:
 		HAL_GPIO_WritePin(LED7_EN1_GPIO_Port, LED7_EN1_Pin, 1);
@@ -39,12 +44,7 @@ void display_run() {
 	default:
 		break;
 	}
-
 	display_index = (display_index + 1) % 3;
-
-	HAL_GPIO_WritePin(LED_LATCH_GPIO_Port, LED_LATCH_Pin, 0);
-	HAL_SPI_Transmit(&hspi1, (void*) &spi_buffer, 1, 1);
-	HAL_GPIO_WritePin(LED_LATCH_GPIO_Port, LED_LATCH_Pin, 1);
 }
 
 void display_7seg(int num){

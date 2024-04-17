@@ -1,4 +1,5 @@
 "./Core/Src/adc.o"
+"./Core/Src/button.o"
 "./Core/Src/display.o"
 "./Core/Src/dma.o"
 "./Core/Src/gamepad.o"

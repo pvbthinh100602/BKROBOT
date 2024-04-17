@@ -8,6 +8,8 @@
 #include "move.h"
 #include "tim.h"
 #include "main.h"
+#include "button.h"
+#include "sensor.h"
 
 #define		UP			1
 #define 	DOWN 		0
@@ -206,4 +208,53 @@ void runDir(int dir, int speed){
 			stop();
 			break;
 	}
+}
+
+void runSpeed(int left, int right){
+	dc1Move(left);
+	dc2Move(left);
+	dc3Move(right);
+	dc4Move(right);
+}
+
+void followLine(){
+	static int last_line_state = 0;
+	int line_state = SensorGetLine();
+	switch(line_state){
+	case LINE_CENTER:
+		if(last_line_state == LINE_CENTER){
+			forward(MAX_SPEED);
+		} else {
+			forward(MIN_SPEED);
+		}
+		break;
+	case LINE_LEFT1:
+		runSpeed(MIN_SPEED, MIN_SPEED*1.25);
+		break;
+	case LINE_LEFT2:
+		runSpeed(0, MIN_SPEED);
+		break;
+	case LINE_LEFT3:
+		runSpeed(-MIN_SPEED, MIN_SPEED);
+		break;
+	default:
+		stop();
+		break;
+	}
+}
+
+int followLineUntilCross(){
+	static int status = 0;
+	int line_state = SensorGetLine();
+	if(status == 0){
+		if(line_state != LINE_CROSS) status = 1;
+	} else if(status == 1){
+		if(line_state == LINE_CROSS) {
+			stop();
+			status = 0;
+			return 1;
+		}
+	}
+	followLine();
+	return 0;
 }

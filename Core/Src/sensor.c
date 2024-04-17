@@ -14,6 +14,11 @@ uint16_t sensor_calib[8] = {0, 0, 0, 0, 0, 0, 0, 0};
 uint8_t line_status = 0;
 uint8_t front_status = 0;
 
+
+void SensorCalib(){
+	HAL_ADC_Start_DMA(&hadc1, (void*)sensor_calib, 8);
+}
+
 void SensorScan(){
 	HAL_ADC_Start_DMA(&hadc1, (void*)sensor_buffer, 8);
 	uint8_t temp = 0;

@@ -30,13 +30,13 @@ void button_scan() {
 	HAL_GPIO_WritePin(INPUT_LOAD_GPIO_Port, INPUT_LOAD_Pin, 1);
 	HAL_SPI_Receive(&hspi1, (void*) &button_buffer, 1, 10);
 
-	uint8_t mask = 0x80;
+	uint8_t mask = 0x01;
 	for (int i = 0; i < 8; i++) {
 		if (button_buffer & mask)
 			button_count[i] = 0;
 		else
 			button_count[i]++;
-		mask = mask >> 1;
+		mask = mask << 1;
 	}
 }
 

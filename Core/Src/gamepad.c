@@ -216,6 +216,12 @@ void gamepad_run_tele(int accel){
 	if(dpad_right){
 		my_dir = ROBOT_DIR_R;
 	}
+
+	if(r2){
+		stop();
+		while(1);
+	}
+
 	if (my_dir != last_dir) // got new direction command
 	{
         run_speed = MIN_SPEED; // reset speed
@@ -232,7 +238,7 @@ void gamepad_run_tele(int accel){
 	case ROBOT_DIR_BW:
 	case ROBOT_DIR_SL:
 	case ROBOT_DIR_SR:
-		runDir(my_dir, run_speed);
+//		runDir(my_dir, run_speed);
 		break;
 	case ROBOT_DIR_R:
 	case ROBOT_DIR_L:
@@ -240,10 +246,10 @@ void gamepad_run_tele(int accel){
 	case ROBOT_DIR_LF:
 	case ROBOT_DIR_RB:
 	case ROBOT_DIR_RF:
-		runDir(my_dir, turn_speed);
+//		runDir(my_dir, turn_speed);
 		break;
 	default:
-		stop();
+//		stop();
 		break;
 	}
 

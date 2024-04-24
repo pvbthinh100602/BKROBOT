@@ -21,8 +21,8 @@
 #define ROBOT_DIR_BW	9
 #define ROBOT_DIR_L		10
 
-#define 	MIN_SPEED		30
-#define 	MAX_SPEED		40
+#define 	MIN_SPEED		20
+#define 	MAX_SPEED		30
 
 void dc1Move(int duty_cycle);
 void dc2Move(int duty_cycle);
@@ -49,5 +49,7 @@ void rotateLeft(int speed);
 void rotateRight(int speed);
 void testDc();
 void runDir(int dir, int speed);
+void followLine();
+int followLineUntilCross();
 
 #endif /* INC_MOVE_H_ */

@@ -18,4 +18,4 @@
 ../Core/Src/move.c:175:6:runDir	16	static
 ../Core/Src/move.c:213:6:runSpeed	16	static
 ../Core/Src/move.c:220:6:followLine	16	static
-../Core/Src/move.c:246:5:followLineUntilCross	16	static
+../Core/Src/move.c:255:5:followLineUntilCross	16	static

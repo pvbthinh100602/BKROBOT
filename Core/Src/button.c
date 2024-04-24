@@ -42,5 +42,5 @@ void button_scan() {
 
 int isButtonPressed(int index){
 	if(index < 0 || index >7) return 0;
-	return button_count[index];
+	return button_count[index] == 1;
 }

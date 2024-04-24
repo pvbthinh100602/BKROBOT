@@ -17,5 +17,5 @@
 ../Core/Src/move.c:160:6:testDc	5
 ../Core/Src/move.c:175:6:runDir	11
 ../Core/Src/move.c:213:6:runSpeed	1
-../Core/Src/move.c:220:6:followLine	6
-../Core/Src/move.c:246:5:followLineUntilCross	5
+../Core/Src/move.c:220:6:followLine	9
+../Core/Src/move.c:255:5:followLineUntilCross	5

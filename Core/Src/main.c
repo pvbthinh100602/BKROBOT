@@ -35,6 +35,8 @@
 #include "step.h"
 #include "tone.h"
 #include "display.h"
+#include "sensor.h"
+#include "button.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -121,6 +123,7 @@ int main(void)
   servo_init(SERVO1);
   gamepad_init();
   display_init();
+  button_init();
   display_7seg(47);
   display_led(0x0f);
   int len = 17;
@@ -133,8 +136,19 @@ int main(void)
 		  500, 500, 500, 200,
 		  500, 500, 500};
 
-  tone_play(note, dur, len);
 
+  do {
+	  HAL_Delay(10);
+	  button_scan();
+  }  while(isButtonPressed(0) == 0);
+
+  SensorCalib();
+  tone_play(note, dur, len);
+  do {
+	  HAL_Delay(10);
+	  button_scan();
+  }
+  while(isButtonPressed(0) == 0);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -144,8 +158,10 @@ int main(void)
 	  if(timer_flag[0] == 1){
 		  setTimer(0, 10);
 		  ledBlink();
+		  SensorScan();
 		  gamepad_update();
 		  gamepad_run_tele(2);
+		  followLineUntilCross();
 	  }
 
 

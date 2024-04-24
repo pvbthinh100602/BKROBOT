@@ -23,6 +23,7 @@
 #define LINE_ERROR	9
 
 void SensorScan();
+void SensorCalib();
 
 uint8_t SensorGetLine();
 

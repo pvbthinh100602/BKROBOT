@@ -6,6 +6,7 @@
  */
 
 #include "display.h"
+#include "sensor.h"
 
 uint8_t display_buffer[3] = {0, 0, 0};
 uint8_t display_7seg_map[10] = { 0x03, 0x9f, 0x25, 0x0d, 0x99, 0x49, 0x41,
@@ -55,3 +56,4 @@ void display_7seg(int num){
 void display_led(uint8_t data_byte){
 	display_buffer[2] = data_byte;
 }
+

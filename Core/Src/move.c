@@ -211,15 +211,15 @@ void runDir(int dir, int speed){
 }
 
 void runSpeed(int left, int right){
-	dc1Move(left);
-	dc2Move(left);
-	dc3Move(right);
-	dc4Move(right);
+	dc3Move(left);
+	dc4Move(left);
+	dc1Move(right);
+	dc2Move(right);
 }
 
 void followLine(){
 	static int last_line_state = 0;
-	int line_state = SensorGetLine();
+	uint8_t line_state = SensorGetLine();
 	switch(line_state){
 	case LINE_CENTER:
 		if(last_line_state == LINE_CENTER){
@@ -237,6 +237,15 @@ void followLine(){
 	case LINE_LEFT3:
 		runSpeed(-MIN_SPEED, MIN_SPEED);
 		break;
+	case LINE_RIGHT1:
+		runSpeed(MIN_SPEED*1.25, MIN_SPEED);
+		break;
+	case LINE_RIGHT2:
+		runSpeed(MIN_SPEED, 0);
+		break;
+	case LINE_RIGHT3:
+		runSpeed(MIN_SPEED, -MIN_SPEED);
+		break;
 	default:
 		stop();
 		break;
@@ -245,13 +254,13 @@ void followLine(){
 
 int followLineUntilCross(){
 	static int status = 0;
-	int line_state = SensorGetLine();
+	uint8_t line_state = SensorGetLine();
 	if(status == 0){
 		if(line_state != LINE_CROSS) status = 1;
 	} else if(status == 1){
 		if(line_state == LINE_CROSS) {
 			stop();
-			status = 0;
+//			status = 0;
 			return 1;
 		}
 	}
